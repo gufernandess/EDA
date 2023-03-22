@@ -6,6 +6,8 @@
 #define EDA_NODE_H
 
 struct Node {
+    // Atributos de um nó
+
     int key;
     Node* left;
     Node* right;

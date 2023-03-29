@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "Tree.h"
+#include "Tree.cpp"
 
 using namespace std;
 
@@ -19,13 +19,13 @@ int main() {
     */
 
     Tree empty;
-    Tree tree_four(4, empty, empty);
-    Tree tree_six(6, empty, empty);
-    Tree tree_seven(7, empty, empty);
-    Tree tree_five(5, tree_six, tree_seven);
-    Tree tree_three(3, tree_four, tree_five);
+    Tree fourth_tree(4, empty, empty);
+    Tree sixth_tree(6, empty, empty);
+    Tree seventh_tree(7, empty, empty);
+    Tree fifth_tree(5, sixth_tree, seventh_tree);
+    Tree third_tree(3, fourth_tree, fifth_tree);
 
-    tree_three.preorder();
+    third_tree.preorder();
     cout << endl;
 
     return 0;

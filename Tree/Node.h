@@ -2,8 +2,8 @@
 // Created by Gustavo Fernandes on 21/03/2023.
 //
 
-#ifndef EDA_NODE_H
-#define EDA_NODE_H
+#ifndef NODE_H
+#define NODE_H
 
 struct Node {
     // Atributos de um nó
@@ -12,11 +12,11 @@ struct Node {
     Node* left;
     Node* right;
 
-    Node(int key, Node* left, Node* right) {
-        this->key;
-        this->left;
-        this->right;
+    Node(int key, Node* left, Node* right) { // Construtor de um nó
+        this->key = key;
+        this->left = left;
+        this->right = right;
     }
 };
 
-#endif //EDA_NODE_H
+#endif //NODE_H

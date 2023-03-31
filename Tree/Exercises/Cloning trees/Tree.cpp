@@ -87,6 +87,15 @@ bool Tree::identical(Tree *tree) {
     _identical(this->_root, tree->_root);
 }
 
+/**
+ * O retorno é uma conjunção de duas condições:
+ * 
+ * 1. O nó a esquerda do primeiro é igual ao nó a esquerda do segundo;
+ * 2. O nó a direita do primeiro é igual ao nó a direita do segundo;
+ * 
+ * Assim, recursivamente, se a esquerda e a direita forem iguais, então a árvore é igual.
+*/
+
 bool Tree::_identical(Node *firstNode, Node *secondNode) {
     if(firstNode == nullptr && secondNode == nullptr) {
         return true;
@@ -106,6 +115,10 @@ Tree *Tree::clone() {
 
     return newTree;
 }
+
+/**
+ * Cria-se um novo nó com a chave do nó atual e recursivamente faz-se a cópia dos nós da esquerda e da direita.
+*/
 
 Node *Tree::_clone(Node *node) {
     if(node == nullptr) {

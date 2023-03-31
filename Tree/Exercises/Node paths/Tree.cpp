@@ -1,7 +1,6 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <stack>
 #include "Tree.h"
 
 struct Node {
@@ -16,15 +15,12 @@ struct Node {
     }
 };
 
+
 Tree::Tree(std::string serial) {
-    _root = nullptr;
     std::stringstream ss(serial);
     _serializeTree(ss, &_root);
 }
 
-Tree::~Tree() {
-    _root = _clear(_root);
-}
 
 void Tree::_serializeTree(std::stringstream& ss, Node **node) {
     std::string value;
@@ -37,6 +33,10 @@ void Tree::_serializeTree(std::stringstream& ss, Node **node) {
     _serializeTree(ss, &((*node)->right));
 }
 
+Tree::~Tree() {
+    _clear(_root);
+}
+
 Node *Tree::_clear(Node *node) {
     if(node != nullptr) { // caso geral: vamos liberar essa arvore
         node->left = _clear(node->left);
@@ -44,6 +44,18 @@ Node *Tree::_clear(Node *node) {
         delete node;
     }
     return nullptr;
+}
+
+void Tree::inorder() {
+    _inorder(_root);
+}
+
+void Tree::_inorder(Node *node) {
+    if(node != nullptr) { // Caso Geral
+        _inorder(node->left);
+        std::cout << node->key << " ";
+        _inorder(node->right);  
+    }
 }
 
 void Tree::bshow(){
@@ -66,40 +78,43 @@ void Tree::_bshow(Node *node, std::string heranca) {
         _bshow(node->left, heranca + "l");
 }
 
-int Tree::size() {
-    return _size_iterativo(_root);
+std::string Tree::find_path(int value) {
+    return _find_path(_root, value);
 }
 
 /**
- * É utilizada uma pilha para armazenar os nós, onde o tamanho da pilha é incrementado a cada nó visitado.
+ * O retorno da função é uma string que representa o caminho até o nó baseado na
+ * seguinte regra:
  * 
- * A cada iteração do laço, o nó do topo da pilha é removido e seus filhos são
- * adicionados na pilha, caso existam.
+ * Se o nó for nulo, retorna "!".
+ * Se o nó for o nó procurado, retorna "x".
+ * Se o nó for o filho esquerdo do nó procurado, retorna "l" + _find_path(node->left, value).
+ * Se o nó for o filho direito do nó procurado, retorna "r" + _find_path(node->right, value).
  * 
- * Dessa forma, a variável size é incrementada a cada nó visitado.
+ * O return "!" no começo da função é para evitar que o programa entre em loop.
 */
 
-int Tree::_size_iterativo(Node *node) {
+std::string Tree::_find_path(Node *node, int value) {
     if(node == nullptr) {
-        return 0;
+        return "!";
+    }
+    
+    if(node->key == value) {
+        return "x";
     }
 
-    int size;
-    std::stack<Node*> stack;
-    stack.push(node);
-
-    for(size = 0; !stack.empty(); size++) {
-        Node *node = stack.top();
-        stack.pop();
-
-        if(node->left != nullptr) {
-            stack.push(node->left);
-        }
-
-        if(node->right != nullptr) {
-            stack.push(node->right);
-        }
+    std::string left = _find_path(node->left, value);
+    
+    if(left != "!") {
+        return "l" + left;
     }
 
-    return size;
-}
+    std::string right = _find_path(node->right, value);
+
+    if(right != "!") {
+        return "r" + right;
+    }
+
+    return "!";
+} 
+

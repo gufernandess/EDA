@@ -97,6 +97,16 @@ int Tree::min_key() {
 
 // Supõe que o ponteiro recebido sempre é diferente de nullptr
 
+/**
+ * É usado o INT_MAX para representar o maior inteiro possível, assim, se a árvore
+ * for vazia, o menor valor de chave será o maior inteiro possível.
+ * 
+ * Além disso, o INT_MAX é um valor que nunca será retornado, pois a chave de um nó
+ * sempre será menor que INT_MAX, que é usado como valor inicial do menor valor de chave.
+ * 
+ * Também é utilizado a função min() do C++, que retorna o menor valor entre dois inteiros.
+*/
+
 int Tree::_min_key(Node *node) {
     if(!node) {
         return INT_MAX;
@@ -116,6 +126,10 @@ int Tree::_sum_keys(Node *node) {
 int Tree::total_internal_nodes() {
     _total_internal_nodes(_root);
 }
+
+/**
+ * Se o nó for nulo ou for uma folha, então não é um nó interno, logo, retorna 0.
+*/
     
 int Tree::_total_internal_nodes(Node *node) {
     if(node == nullptr || (node->left == nullptr && node->right == nullptr)) {
@@ -128,6 +142,12 @@ int Tree::_total_internal_nodes(Node *node) {
 int Tree::um_filho() {
     _um_filho(_root);
 }
+
+/**
+ * Se o nó for nulo, então não tem nenhum filho, logo, retorna 0. Caso contrário,
+ * é verificado se o nó tem apenas um filho com uma disjunção exclusiva que
+ * retorna 1 se apenas um dos operandos for verdadeiro, e 0 caso contrário.
+ * */
 
 int Tree::_um_filho(Node *node) {
     return (node == nullptr) ? 0 :

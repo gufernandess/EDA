@@ -99,6 +99,11 @@ int Tree::count_leaves() {
     return _count_leaves(_root);
 }
 
+/**
+ * È retornado 1 caso o nó seja uma folha, ou seja, não possui filhos.
+ * Assim sendo, a função recursiva irá incrementar o contador caso o nó seja uma folha.
+*/
+
 int Tree::_count_leaves(Node *node) {
     if(node == nullptr) {
         return 0;
@@ -114,6 +119,13 @@ int Tree::_count_leaves(Node *node) {
 void Tree::delete_leaves() {
     _delete_leaves(_root);
 }
+
+/**
+ * Caso o nó seja uma folha, ele é deletado e o ponteiro é retornado como nullptr
+ * para evitar que o nó seja acessado novamente.
+ * 
+ * Caso o nó não seja uma folha, a função recursiva é chamada para os filhos.
+*/
 
 Node* Tree::_delete_leaves(Node *node) {
     if(node == nullptr) {
@@ -133,6 +145,11 @@ Node* Tree::_delete_leaves(Node *node) {
 void Tree::delete_leaves_with_value(int key) {
     _delete_leaves_with_value(key, _root);
 }
+
+/**
+ * Praticamente idêntico ao método delete_leaves, porém é verificado se o nó possui
+ * o valor passado como parâmetro.
+*/
 
 Node* Tree::_delete_leaves_with_value(int key, Node *node) {
     if(node == nullptr) {

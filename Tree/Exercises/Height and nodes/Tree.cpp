@@ -112,6 +112,10 @@ int Tree::height() {
     return _height(_root);
 }
 
+/**
+ * A altura da árvore é obtida através da função max entre a altura da subárvore esquerda e a altura da subárvore direita.
+*/
+
 int Tree::_height(Node *node) {
     if(node == nullptr) {
         return 0;

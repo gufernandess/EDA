@@ -21,7 +21,6 @@ public:
 
 private:
     Node *root {nullptr};
-
     Node *add(Node *node, int key);
     Node *search(Node *node, int key);
     Node *clear(Node *node);
